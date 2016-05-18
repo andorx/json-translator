@@ -12,5 +12,5 @@ Translate JSON files (supported nested structure) using MSTranslator service
 
 ### TODO:
 - Add reference link to Microsoft Translator
-- Export to Node module
+- Format export file
 - Multiple translator client support (Google Translate)
