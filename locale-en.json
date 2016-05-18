@@ -1,0 +1,11 @@
+{
+  "GENERAL": {
+    "TITLE": "BlueCart | Ordering Made Simple",
+    "LOGOUT": "Logout",
+    "GETTING": "Hi, {{ username }}",
+    "CHECKOUT": "Checkout",
+    "SHOW": "Show",
+    "HIDE": "Hide",
+    "CLOSE": "Close"
+  }
+}
