@@ -54,11 +54,4 @@ function TranslateJsonFromFile(options) {
   }
 }
 
-TranslateJsonFromFile({
-  clientId: 'json-translator',
-  clientSecret: 'bkPtYnYdoNmKcaFioL3upKc+rs8C87+aaniNzT2MAyI=',
-  sourcePath: './locale-en.json',
-  targetPath: './locale-es.json',
-  fromLang: 'en',
-  toLang: 'es'
-});
+module.exports = TranslateJsonFromFile;
