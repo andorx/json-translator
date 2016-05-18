@@ -2,7 +2,7 @@
 Translate JSON files (supported nested structure) using MSTranslator service
 
 ## Usage:
-Calling *TranslateJsonFromFile* with `options` params, that requires these properties:
+**TranslateJsonFromFile(options)**, `options` param requires these properties:
 - clientId: Microsoft Translator App Id,
 - clientSecret: Microsoft Translator App Secret Key,
 - sourcePath: source file in JSON format,
