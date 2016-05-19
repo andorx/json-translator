@@ -1,11 +1,10 @@
 var fs = require('fs'),
-    _ = require('lodash'),
     when = require("when"),
     nodefn = require("when/node"),
     jsonFile = require('jsonfile'),
     M$Translator = require('mstranslator');
 
-function TranslateJsonFromFile(options) {
+module.exports = function jsonTranslator(options) {
   'use strict';
 
   let clientId = options.clientId,
@@ -32,8 +31,8 @@ function TranslateJsonFromFile(options) {
   }
 
   function asyncTranslateObject(object, fromLang, toLang) {
-    return when.all(_.map(object, function(value, key) {
-      if (typeof object[key] == 'object') {
+    return when.all(Object.keys(object).map(function(key, index) {
+      if (typeof object[key] === 'object') {
         return asyncTranslateObject(object[key], fromLang, toLang);
       } else {
         return nodefn.call(translateClient.translate.bind(translateClient), {
@@ -46,12 +45,11 @@ function TranslateJsonFromFile(options) {
             return object;
           });
       }
-    }));
+    }))
+    ;
   }
 
   function writeTranslatedObjectToJsonFile(translatedObject, path) {
     fs.writeFileSync(path, JSON.stringify(translatedObject) , 'utf-8');
   }
-}
-
-module.exports = TranslateJsonFromFile;
+};
