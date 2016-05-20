@@ -1,8 +1,8 @@
 # json-translator
-Translate JSON files (supported nested structure) using MSTranslator service
+Translate JSON files (supported nested structure) using [MSTranslator](https://datamarket.azure.com/dataset/bing/microsofttranslator) service
 
 ### Usage:
-**TranslateJsonFromFile(options)**, `options` param requires these properties:
+**jsonTranslate(options)**, `options` param requires these properties:
 - *clientId*: Microsoft Translator App Id,
 - *clientSecret*: Microsoft Translator App Secret Key,
 - *sourcePath*: source file in JSON format,
@@ -11,6 +11,5 @@ Translate JSON files (supported nested structure) using MSTranslator service
 - *toLang*: translate to language
 
 ### TODO:
-- Add reference link to Microsoft Translator
-- Format export file
 - Multiple translator client support (Google Translate)
+- Guarantee the order of properties after translated
