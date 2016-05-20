@@ -1,8 +1,8 @@
-var fs = require('fs'),
-    when = require("when"),
-    nodefn = require("when/node"),
-    jsonFile = require('jsonfile'),
-    M$Translator = require('mstranslator');
+var fs = require('fs');
+var keys = require('when/keys');
+var nodefn = require('when/node');
+var jsonFile = require('jsonfile');
+var M$Translator = require('mstranslator');
 
 module.exports = function jsonTranslator(options) {
   'use strict';
@@ -20,7 +20,7 @@ module.exports = function jsonTranslator(options) {
 
   asyncReadJsonFile(sourcePath)
     .then(function(rawObject) {
-      return asyncTranslateObject(rawObject, fromLang, toLang);
+      return asyncTranslateObject(rawObject);
     })
     .then(function(translatedObject) {
       writeTranslatedObjectToJsonFile(translatedObject, targetPath);
@@ -30,26 +30,26 @@ module.exports = function jsonTranslator(options) {
     return nodefn.call(jsonFile.readFile.bind(jsonFile), path);
   }
 
-  function asyncTranslateObject(object, fromLang, toLang) {
-    return when.all(Object.keys(object).map(function(key, index) {
-      if (typeof object[key] === 'object') {
-        return asyncTranslateObject(object[key], fromLang, toLang);
-      } else {
-        return nodefn.call(translateClient.translate.bind(translateClient), {
-            text: object[key],
+  function asyncTranslateObject(object) {
+    for (var prop in object) {
+      if (typeof object[prop] !== 'object') {
+        object[prop] = nodefn.call(translateClient.translate.bind(translateClient), {
+            text: object[prop],
             from: fromLang,
             to: toLang
           })
           .then(function(result) {
-            object[key] = result;
-            return object;
+            return result;
           });
+      } else {
+        object[prop] = asyncTranslateObject(object[prop]);
       }
-    }))
-    ;
+    }
+
+    return keys.all(object);
   }
 
   function writeTranslatedObjectToJsonFile(translatedObject, path) {
-    fs.writeFileSync(path, JSON.stringify(translatedObject) , 'utf-8');
+    fs.writeFileSync(path, JSON.stringify(translatedObject, null, 2) , 'utf-8');
   }
 };
