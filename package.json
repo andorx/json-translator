@@ -18,7 +18,9 @@
   },
   "keywords": [
     "translator",
-    "json"
+    "json",
+    "language",
+    "mstranslator"
   ],
   "author": "andorx",
   "license": "MIT",
