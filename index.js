@@ -4,7 +4,7 @@ var nodefn = require('when/node');
 var jsonFile = require('jsonfile');
 var M$Translator = require('mstranslator');
 
-module.exports = function jsonTranslator(options) {
+exports = module.exports = function jsonTranslator(options) {
   'use strict';
 
   let clientId = options.clientId,
